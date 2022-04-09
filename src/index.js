@@ -49,18 +49,12 @@ app.post('/users', (request, response) => {
 app.get('/todos', checksExistsUserAccount, (request, response) => {
   const { user } = request;
 
-  // const user = users.find(user => user.username === username);
-  //const todos = user.todos;
-
   return response.status(201).json(user.todos);
 });
 
 app.post('/todos', checksExistsUserAccount, (request, response) => {
   const { title, deadline } = request.body;
-  const { user } = request;
-
-  // const user = users.find(user => user.username === username);
-  
+  const { user } = request;  
 
   const newTodo = { 
     id: uuidv4(), // precisa ser um uuid
@@ -81,8 +75,6 @@ app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
   const { id } = request.params;
   const { title, deadline } = request.body;
 
-  // const user = users.find(user => user.username === username);
-
   const todos = user.todos;
 
   const todo = todos.find(todo => todo.id === id);
@@ -102,8 +94,6 @@ app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
   const { user } = request;
   const { id } = request.params;
 
-  // const user = users.find(user => user.username === username);
-
   const todos = user.todos;
 
   const todo = todos.find(todo => todo.id === id);
@@ -120,8 +110,6 @@ app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
 app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
   const { user } = request;
   const { id } = request.params;
-
-  const user = users.find(user => user.username === username);
 
   const todos = user.todos;
 
